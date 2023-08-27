@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Render", "ConsoleApp.Render\ConsoleApp.Render.csproj", "{15DEBDED-A843-43B8-AB7B-A1FA6DEDBD33}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.RazorDependency", "ConsoleApp.RazorDependency\ConsoleApp.RazorDependency.csproj", "{ACE5CFC2-FEE5-40E7-BBC2-7847E6D8A0ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15DEBDED-A843-43B8-AB7B-A1FA6DEDBD33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15DEBDED-A843-43B8-AB7B-A1FA6DEDBD33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15DEBDED-A843-43B8-AB7B-A1FA6DEDBD33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15DEBDED-A843-43B8-AB7B-A1FA6DEDBD33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACE5CFC2-FEE5-40E7-BBC2-7847E6D8A0ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACE5CFC2-FEE5-40E7-BBC2-7847E6D8A0ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACE5CFC2-FEE5-40E7-BBC2-7847E6D8A0ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACE5CFC2-FEE5-40E7-BBC2-7847E6D8A0ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {25B8DD7D-D8B3-4147-A2C7-19244621C012}
+	EndGlobalSection
+EndGlobal
