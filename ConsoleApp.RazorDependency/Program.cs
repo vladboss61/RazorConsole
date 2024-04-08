@@ -31,6 +31,7 @@ internal class Program
 
             return output.ToHtmlString();
         });
+
         Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
 
         var html2 = await render.Dispatcher.InvokeAsync(async () =>
