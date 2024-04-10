@@ -25,14 +25,13 @@ internal class Program
         {
             var dictionary = new Dictionary<string, object>
             {
-                { "Message", "Hello from the Render Message component!" }
+                { nameof(RenderMessage.Message), "Hello from the Render Message component!" }
             };
-
             var parameters = ParameterView.FromDictionary(dictionary);
             var output = await htmlRenderer.RenderComponentAsync<RenderMessage>(parameters);
-
             return output.ToHtmlString();
         });
 
+        Console.WriteLine(html);
     }
 }

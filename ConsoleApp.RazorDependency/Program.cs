@@ -33,6 +33,7 @@ internal class Program
         });
 
         Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+        Console.WriteLine(html);
 
         var html2 = await render.Dispatcher.InvokeAsync(async () =>
         {
@@ -48,6 +49,6 @@ internal class Program
             return output.ToHtmlString();
         });
 
-        Console.WriteLine("Hello, World!");
+        Console.WriteLine(html2);
     }
 }
