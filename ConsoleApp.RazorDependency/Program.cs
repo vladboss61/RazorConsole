@@ -23,7 +23,7 @@ internal class Program
         {
             var dictionary = new Dictionary<string, object>
             {
-                { "Message", "Hello from the Render Message component!" }
+                { nameof(RenderMessage.Message), "Hello from the Render Message component!" }
             };
 
             var parameters = ParameterView.FromDictionary(dictionary);
@@ -40,7 +40,7 @@ internal class Program
             Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
             var dictionary = new Dictionary<string, object>
             {
-                { "Message", "Message 2" }
+                { nameof(RenderMessage.Message), "Message 2" }
             };
 
             var parameters = ParameterView.FromDictionary(dictionary);
