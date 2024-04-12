@@ -1,8 +1,24 @@
-﻿<h1>Render Message</h1>
+﻿<h1> Render Message</h1>
+
+@foreach (var messageItem in MessageItems)
+{
+    <div id="id_@messageItem">@messageItem</div>
+}
+
+<div>
+    <span id="inner_id">@InnerMessageViewModel.MsgId</span>
+    <span id="inner_name">@InnerMessageViewModel.MsgName</span>
+</div>
 
 <p>@Message</p>
 
 @code {
     [Parameter]
     public string Message { get; set; }
+
+    [Parameter]
+    public string[] MessageItems { get; set; }
+
+    [Parameter]
+    public InnerRenderMsgViewModel InnerMessageViewModel { get; set; }
 }

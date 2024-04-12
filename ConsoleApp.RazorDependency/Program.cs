@@ -23,7 +23,9 @@ internal class Program
         {
             var dictionary = new Dictionary<string, object>
             {
-                { nameof(RenderMessage.Message), "Hello from the Render Message component!" }
+                { nameof(RenderMessage.Message), "Hello from the External Lib Render Message component!" },
+                { nameof(RenderMessage.MessageItems), new[] { "data1", "data2", "data3" } },
+                { nameof(RenderMessage.InnerMessageViewModel), new InnerRenderMsgViewModel { MsgId = 9999, MsgName = "Msg Name" } },
             };
 
             var parameters = ParameterView.FromDictionary(dictionary);
@@ -40,7 +42,9 @@ internal class Program
             Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
             var dictionary = new Dictionary<string, object>
             {
-                { nameof(RenderMessage.Message), "Message 2" }
+                { nameof(RenderMessage.Message), "Message 2" },
+                { nameof(RenderMessage.MessageItems), new[] { "data1", "data2", "data3" } },
+                { nameof(RenderMessage.InnerMessageViewModel), new InnerRenderMsgViewModel { MsgId = 9999, MsgName = "Msg Name" } },
             };
 
             var parameters = ParameterView.FromDictionary(dictionary);
