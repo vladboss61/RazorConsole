@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using ConsoleApp.Render.Core;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WebMarkupMin.Core;
+using WebMarkupMin.Core.Loggers;
 
 namespace ConsoleApp.Render
 {
@@ -15,6 +13,16 @@ namespace ConsoleApp.Render
         {
             services.AddLogging();
             services.AddSingleton((builder) => new HtmlRenderer(builder, builder.GetRequiredService<ILoggerFactory>()));
+
+            services.AddSingleton<IMarkupMinifier>(
+                new HtmlMinifier(
+                    new HtmlMinificationSettings(),
+                    new KristensenCssMinifier(),
+                    new CrockfordJsMinifier(),
+                    new NullLogger()));
+
+            services.AddSingleton<IHtmlRender, HtmlRender>();
+
             return services;
         }
     }
