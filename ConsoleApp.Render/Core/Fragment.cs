@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Components.Rendering;
 using System.Collections.Generic;
 
 namespace ConsoleApp.Render.Core;
-
+    
 public static class Fragment
 {
-    public static RenderFragment ToFragment<Component>(Dictionary<string, object> parameters = null) where Component : IComponent
+    public static RenderFragment ToFragment<Component>(Dictionary<string, object> parameters = null)
+        where Component : IComponent
     {
         return builder =>
         {
