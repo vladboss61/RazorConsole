@@ -1,0 +1,16 @@
+﻿
+<h3>Footer</h3>
+
+<h3>@Info</h3>
+
+<div>
+	@ChildContent
+</div>
+
+@code {
+	[Parameter]
+	public string Info { get; set; }
+
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+}
