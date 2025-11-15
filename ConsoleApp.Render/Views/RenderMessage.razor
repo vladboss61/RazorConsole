@@ -17,7 +17,15 @@
 <Footer Info=@($"This is SimpleBody Info - {Message}")>
     <SimpleBody Info=@($"This is InnerSimpleBody Info - {InnerMessageViewModel.MsgName}")>
         <!--InnerBody RenderFragment in SimpleBody and  in Footer we have ChildContent is agreement and no need to define <ChildContent> </ChildContent> -->
-        <InnerBody><div>inner inner</div></InnerBody>
+        <InnerBody>
+            @if (false)
+            {
+                <div>inner inner true</div>
+            } else
+            {
+                <div>inner inner false</div>
+            }
+        </InnerBody>
     </SimpleBody>
 </Footer>
 
