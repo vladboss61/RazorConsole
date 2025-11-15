@@ -37,16 +37,8 @@ public sealed class RazorHtmlRenderWrapper(HtmlRenderer htmlRenderer, IMarkupMin
     public async Task<Stream> RenderStreamAsync<TComponent>(Dictionary<string, object> parameters)
         where TComponent : IComponent
     {
-        var stringBuilder = new StringBuilder();
-        using var renderedStringWriter = new StringWriter(stringBuilder);
-
-        await _htmlRenderer.Dispatcher.InvokeAsync(async () =>
-            (await _htmlRenderer.RenderComponentAsync<TComponent>(
-                ParameterView.FromDictionary(parameters))
-            ).WriteHtmlTo(renderedStringWriter));
-
-        string minifiedHtml = _markupMinifier.Minify(stringBuilder.ToString()).MinifiedContent;
-
+        var minifiedHtml = await GetMinifiedHtmlAsync<TComponent>(parameters);
+        
         var stream = new MemoryStream();
         using (var streamWriter = new StreamWriter(stream, leaveOpen: true))
         {
@@ -57,5 +49,31 @@ public sealed class RazorHtmlRenderWrapper(HtmlRenderer htmlRenderer, IMarkupMin
         stream.Position = 0;
 
         return stream;
+    }
+
+    public async Task RenderStreamAsync<TComponent>(Stream stream, Dictionary<string, object> parameters)
+        where TComponent : IComponent
+    {
+        var minifiedHtml = await GetMinifiedHtmlAsync<TComponent>(parameters);
+
+        using var streamWriter = new StreamWriter(stream, leaveOpen: true);
+
+        await streamWriter.WriteAsync(minifiedHtml);
+        await streamWriter.FlushAsync();
+    }
+
+    private async Task<string> GetMinifiedHtmlAsync<TComponent>(Dictionary<string, object> parameters)
+        where TComponent : IComponent
+    {
+        var stringBuilder = new StringBuilder();
+        using var renderedStringWriter = new StringWriter(stringBuilder);
+
+        await _htmlRenderer.Dispatcher.InvokeAsync(async () =>
+            (await _htmlRenderer.RenderComponentAsync<TComponent>(
+                ParameterView.FromDictionary(parameters))
+            ).WriteHtmlTo(renderedStringWriter));
+
+        string minifiedHtml = _markupMinifier.Minify(stringBuilder.ToString()).MinifiedContent;
+        return minifiedHtml;
     }
 }
