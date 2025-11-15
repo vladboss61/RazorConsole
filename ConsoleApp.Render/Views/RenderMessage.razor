@@ -14,6 +14,8 @@
 
 <p>@Message</p>
 
+<SimpleBody Info=@($"This is SimpleBody Info - {Message}")></SimpleBody>
+
 @code {
     [Parameter]
     public string Message { get; set; }
