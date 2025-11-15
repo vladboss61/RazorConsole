@@ -1,5 +1,4 @@
-﻿
-namespace ConsoleApp.Render.Views;
+﻿namespace ConsoleApp.Render.Models;
 
 public class InnerRenderMsgViewModel
 {

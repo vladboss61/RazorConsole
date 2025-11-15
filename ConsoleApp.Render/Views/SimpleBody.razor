@@ -1,0 +1,12 @@
+﻿<h3>SimpleBody @Info</h3>
+
+@InnerBody
+
+@code {
+
+	[Parameter]
+	public string Info { get; set; }
+
+	[Parameter]
+	public RenderFragment InnerBody { get; set; }
+}

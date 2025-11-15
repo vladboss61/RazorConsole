@@ -1,4 +1,5 @@
-﻿using ConsoleApp.Render.Views;
+﻿using ConsoleApp.Render.Models;
+using ConsoleApp.Render.Views;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.DependencyInjection;

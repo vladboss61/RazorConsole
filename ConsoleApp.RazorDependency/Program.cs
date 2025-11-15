@@ -1,5 +1,6 @@
 ﻿using ConsoleApp.Render;
 using ConsoleApp.Render.Core;
+using ConsoleApp.Render.Models;
 using ConsoleApp.Render.Views;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -21,11 +22,19 @@ internal class Program
 
         var render = services.BuildServiceProvider().GetService<IHtmlRender>();
 
+        var simpleBodyParams = new Dictionary<string, object>()
+        {
+            { nameof(SimpleBody.Info), "Hey simple" },
+            { nameof(SimpleBody.InnerBody), Fragment.ToFragment<InnerSimpleBody>() }
+        };
+
         var dictionary = new Dictionary<string, object>
             {
                 { nameof(RenderMessage.Message), "Hello from the External Lib Render Message component!" },
                 { nameof(RenderMessage.MessageItems), new[] { "data1", "data2", "data3" } },
                 { nameof(RenderMessage.InnerMessageViewModel), new InnerRenderMsgViewModel { MsgId = 9999, MsgName = "Msg Name" } },
+                { nameof(RenderMessage.Header), Fragment.ToFragment<Header>() },
+                { nameof(RenderMessage.Body), Fragment.ToFragment<SimpleBody>(simpleBodyParams) }
             };
 
         var html = await render.RenderAsync<RenderMessage>(dictionary);

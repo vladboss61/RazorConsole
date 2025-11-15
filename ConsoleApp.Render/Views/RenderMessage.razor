@@ -1,4 +1,5 @@
-﻿<h1> Render Message</h1>
+﻿@using ConsoleApp.Render.Models
+@Header
 
 @foreach (var messageItem in MessageItems)
 {
@@ -8,6 +9,7 @@
 <div>
     <span id="inner_id">@InnerMessageViewModel.MsgId</span>
     <span id="inner_name">@InnerMessageViewModel.MsgName</span>
+    @Body
 </div>
 
 <p>@Message</p>
@@ -21,4 +23,10 @@
 
     [Parameter]
     public InnerRenderMsgViewModel InnerMessageViewModel { get; set; }
+
+    [Parameter]
+    public RenderFragment Header { get; set; }
+
+    [Parameter]
+    public RenderFragment Body { get; set; }
 }
