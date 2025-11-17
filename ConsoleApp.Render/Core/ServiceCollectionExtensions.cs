@@ -1,8 +1,6 @@
 ﻿using ConsoleApp.Render.Core.Interfaces;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
 using WebMarkupMin.Core;
 using WebMarkupMin.Core.Loggers;
 

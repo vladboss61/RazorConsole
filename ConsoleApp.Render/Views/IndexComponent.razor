@@ -9,6 +9,11 @@
 }
 
 <div>
+    <img src="@($"data:image/png;base64,{DownloadImageBase64}")" />
+    <video controls>
+        <source src="@($"data:video/mp4;base64,{DownloadVideoBase64}")" type="video/mp4">
+    </video>
+
     <span id="inner_id">@InnerMessageViewModel.MsgId</span>
     <span id="inner_name">@InnerMessageViewModel.MsgName</span>
     @Body
@@ -32,6 +37,12 @@
 </FooterComponent>
 
 @code {
+
+    [Parameter]
+    public string DownloadVideoBase64 { get; set; }
+    
+    [Parameter]
+    public string DownloadImageBase64 { get; set; }
 
     [Parameter]
     public bool IsInnerApplied { get; set; }

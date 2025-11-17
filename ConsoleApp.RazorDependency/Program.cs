@@ -23,8 +23,16 @@ internal sealed class Program
                 { nameof(SimpleBodyComponent.InnerBody), Fragment.ToFragment<InnerSimpleBodyComponent>() }
             };
 
+        var downloadBytes = File.ReadAllBytes("./assets/download.jpg");
+        string downloadImageBase64 = Convert.ToBase64String(downloadBytes);
+
+        var downloadVideoBytes = File.ReadAllBytes("./assets/download_video.mp4");
+        string downloadVideoBase64 = Convert.ToBase64String(downloadVideoBytes);
+
         var dictionary = new Dictionary<string, object>
             {
+                { nameof(IndexComponent.DownloadVideoBase64), downloadVideoBase64 },
+                { nameof(IndexComponent.DownloadImageBase64), downloadImageBase64 },
                 { nameof(IndexComponent.IsInnerApplied), false },
                 { nameof(IndexComponent.Message), "Hello from the External Lib Render Message component!" },
                 { nameof(IndexComponent.MessageItems), new[] { "data1", "data2", "data3" } },
