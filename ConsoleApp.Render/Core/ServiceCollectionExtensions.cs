@@ -10,11 +10,11 @@ namespace ConsoleApp.Render.Core
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddRenderer(this IServiceCollection services)
+        public static IServiceCollection AddRazorHtmlRenderer(this IServiceCollection services)
         {
             services.AddLogging();
 
-            services.AddSingleton((IServiceProvider builder) => new HtmlRenderer(builder, builder.GetRequiredService<ILoggerFactory>()));
+            services.AddSingleton<HtmlRenderer>();
             services.AddSingleton<IHtmlRender, RazorHtmlRenderWrapper>();
             services.AddSingleton<IMarkupMinifier>(
                 new HtmlMinifier(

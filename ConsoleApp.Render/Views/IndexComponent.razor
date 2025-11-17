@@ -1,4 +1,6 @@
-﻿@using ConsoleApp.Render.Models
+﻿@namespace ConsoleApp.Render.Views
+
+@using ConsoleApp.Render.Models
 @Header
 
 @foreach (var messageItem in MessageItems)
@@ -14,22 +16,26 @@
 
 <p>@Message</p>
 
-<Footer Info=@($"This is SimpleBody Info - {Message}")>
-    <SimpleBody Info=@($"This is InnerSimpleBody Info - {InnerMessageViewModel.MsgName}")>
+<FooterComponent Info=@($"This is SimpleBody Info - {Message}")>
+    <SimpleBodyComponent Info=@($"This is InnerSimpleBody Info - {InnerMessageViewModel.MsgName}")>
         <!--InnerBody RenderFragment in SimpleBody and  in Footer we have ChildContent is agreement and no need to define <ChildContent> </ChildContent> -->
-        <InnerBody>
-            @if (false)
+        <InnerSimpleBodyComponent>
+            @if (IsInnerApplied)
             {
-                <div>inner inner true</div>
+                <div>inner is applied</div>
             } else
             {
-                <div>inner inner false</div>
+                <div>inner is not applied</div>
             }
-        </InnerBody>
-    </SimpleBody>
-</Footer>
+        </InnerSimpleBodyComponent>
+    </SimpleBodyComponent>
+</FooterComponent>
 
 @code {
+
+    [Parameter]
+    public bool IsInnerApplied { get; set; }
+
     [Parameter]
     public string Message { get; set; }
 

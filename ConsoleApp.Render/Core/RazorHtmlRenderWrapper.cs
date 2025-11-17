@@ -46,7 +46,7 @@ public sealed class RazorHtmlRenderWrapper(HtmlRenderer htmlRenderer, IMarkupMin
             await streamWriter.FlushAsync();
         }
 
-        stream.Position = 0;
+        stream.Seek(0, SeekOrigin.Begin);
 
         return stream;
     }
@@ -60,6 +60,8 @@ public sealed class RazorHtmlRenderWrapper(HtmlRenderer htmlRenderer, IMarkupMin
 
         await streamWriter.WriteAsync(minifiedHtml);
         await streamWriter.FlushAsync();
+
+        stream.Seek(0, SeekOrigin.Begin);
     }
 
     private async Task<string> GetMinifiedHtmlAsync<TComponent>(Dictionary<string, object> parameters)
