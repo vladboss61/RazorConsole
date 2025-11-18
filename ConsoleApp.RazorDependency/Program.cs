@@ -1,4 +1,5 @@
-﻿using ConsoleApp.Render.Core;
+﻿using ConsoleApp.Render.assets;
+using ConsoleApp.Render.Core;
 using ConsoleApp.Render.Core.Interfaces;
 using ConsoleApp.Render.Models;
 using ConsoleApp.Render.Views;
@@ -23,11 +24,11 @@ internal sealed class Program
                 { nameof(SimpleBodyComponent.InnerBody), Fragment.ToFragment<InnerSimpleBodyComponent>() }
             };
 
-        var downloadBytes = File.ReadAllBytes("./assets/download.jpg");
-        string downloadImageBase64 = Convert.ToBase64String(downloadBytes);
+        //var downloadBytes = File.ReadAllBytes("./assets/download.jpg");
+        string downloadImageBase64 = Convert.ToBase64String(Resources.download);
 
         var downloadVideoBytes = File.ReadAllBytes("./assets/download_video.mp4");
-        string downloadVideoBase64 = Convert.ToBase64String(downloadVideoBytes);
+        string downloadVideoBase64 = Convert.ToBase64String(Resources.download_video);
 
         var dictionary = new Dictionary<string, object>
             {
