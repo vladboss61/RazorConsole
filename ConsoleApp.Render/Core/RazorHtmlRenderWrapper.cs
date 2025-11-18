@@ -51,6 +51,7 @@ public sealed class RazorHtmlRenderWrapper(HtmlRenderer htmlRenderer, IMarkupMin
         return stream;
     }
 
+    /// <inheritdoc/>
     public async Task RenderStreamAsync<TComponent>(Stream stream, Dictionary<string, object> parameters)
         where TComponent : IComponent
     {

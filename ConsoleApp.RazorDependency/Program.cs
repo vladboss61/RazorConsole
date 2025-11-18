@@ -1,7 +1,7 @@
 ﻿using ConsoleApp.Render.assets;
 using ConsoleApp.Render.Core;
 using ConsoleApp.Render.Core.Interfaces;
-using ConsoleApp.Render.Models;
+using ConsoleApp.Render.Models.ViewModels;
 using ConsoleApp.Render.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;

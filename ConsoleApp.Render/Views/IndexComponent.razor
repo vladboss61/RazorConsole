@@ -1,8 +1,7 @@
 ﻿@namespace ConsoleApp.Render.Views
 
-@using ConsoleApp.Render.Models
+@using ConsoleApp.Render.Models.ViewModels
 @Header
-
 @foreach (var messageItem in MessageItems)
 {
     <div id="id_@messageItem">@messageItem</div>
