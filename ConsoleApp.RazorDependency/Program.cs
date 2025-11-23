@@ -74,17 +74,17 @@ public static class TrackComparer
                 ? friendlyNameWithSubdomain
                 : $"{parentPath}.{friendlyNameWithSubdomain}";
 
-            var currentSubDomain = string.IsNullOrEmpty(parentSubDomain) ? trackAttribute.Domain : parentSubDomain;
+            var currentDomain = string.IsNullOrEmpty(parentSubDomain) ? trackAttribute.Domain : parentSubDomain;
 
             if (IsCollection(property.PropertyType))
             {
-                var collectionChanges = CompareCollections(oldValue, newValue, property.PropertyType, currentPath, currentFriendlyName, currentSubDomain);
+                var collectionChanges = CompareCollections(oldValue, newValue, property.PropertyType, currentPath, currentFriendlyName, currentDomain);
                 changes.AddRange(collectionChanges);
             }
             else if (IsComplexType(property.PropertyType) && HasTrackAsAttribute(property.PropertyType))
             {
                 // Recursively compare nested objects
-                var nestedChanges = CompareNested(oldValue, newValue, property.PropertyType, currentFriendlyName, currentSubDomain);
+                var nestedChanges = CompareNested(oldValue, newValue, property.PropertyType, currentFriendlyName, currentDomain);
                 changes.AddRange(nestedChanges);
             }
             else if (!AreEqual(oldValue, newValue))
@@ -92,7 +92,7 @@ public static class TrackComparer
                 changes.Add(new TrackChange
                 {
                     PropertyName = currentPath,
-                    Name = currentSubDomain,
+                    Domain = currentDomain,
                     FriendlyName = currentFriendlyName,
                     OldValue = oldValue,
                     NewValue = newValue
@@ -103,7 +103,7 @@ public static class TrackComparer
         return changes;
     }
 
-    private static List<TrackChange> CompareNested(object? oldValue, object? newValue, Type type, string parentPath, string? parentSubDomain)
+    private static List<TrackChange> CompareNested(object? oldValue, object? newValue, Type type, string parentPath, string? parentDomain)
     {
         if (oldValue == null && newValue == null)
         {
@@ -114,7 +114,7 @@ public static class TrackComparer
             .GetMethod(nameof(Compare), BindingFlags.Public | BindingFlags.Static)!
             .MakeGenericMethod(type);
 
-        var result = compareMethod.Invoke(null, [oldValue, newValue, parentPath, parentSubDomain]);
+        var result = compareMethod.Invoke(null, [oldValue, newValue, parentPath, parentDomain]);
         return (List<TrackChange>)result!;
     }
 
@@ -179,7 +179,7 @@ public static class TrackComparer
                 changes.Add(new TrackChange
                 {
                     PropertyName = currentPath,
-                    Name = currentSubDomain,
+                    Domain = currentSubDomain,
                     FriendlyName = currentFriendlyName,
                     OldValue = oldValue,
                     NewValue = newValue
@@ -288,7 +288,7 @@ public class TrackChange
 {
     public string PropertyName { get; set; } = string.Empty;
 
-    public string Name { get; set; }
+    public string Domain { get; set; }
     
     public string FriendlyName { get; set; } = string.Empty;
     
@@ -305,7 +305,7 @@ public class TrackChange
 
 public class Information
 {
-    [TrackAs(domain: "Info", friendlyName: "Information about changes")]
+    [TrackAs(domain: nameof(Information), friendlyName: "Information about changes")]
     public string Info { get; set; }
 
     [TrackAs(friendlyName: "InnerObjects")]
