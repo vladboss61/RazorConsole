@@ -309,10 +309,19 @@ public class Information
     public string Info { get; set; }
 
     [TrackAs(friendlyName: "InnerObjects")]
-    public List<object> InnerObjects { get; set; }
+    public List<InnerModel> InnerObjects { get; set; }
 
     [TrackId]
     public Guid InfoId { get; set; }
+}
+
+public class InnerModel
+{
+    [TrackId]
+    public int Id { get; set; }
+
+    [TrackAs(domain: nameof(InnerModel), "Name")]
+    public string Name { get; set; }
 }
 
 internal sealed class Program
