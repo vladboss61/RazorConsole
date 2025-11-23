@@ -37,9 +37,9 @@ public class TrackIdAttribute : Attribute
 {
 }
 
-public static class TrackComparer
+public static class ChangeTracker
 {
-    public static List<TrackChange> Compare<T>(T? oldVersion, T? newVersion, string? parentPath = null, string? parentSubDomain = null) where T : class
+    public static List<TrackChange> GetChanges<T>(T? oldVersion, T? newVersion, string? parentPath = null, string? parentSubDomain = null) where T : class
     {
         var changes = new List<TrackChange>();
 
@@ -110,7 +110,7 @@ public static class TrackComparer
             return [];
         }
 
-        var compareMethod = typeof(TrackComparer)
+        var compareMethod = typeof(ChangeTracker)
             .GetMethod(nameof(Compare), BindingFlags.Public | BindingFlags.Static)!
             .MakeGenericMethod(type);
 
@@ -332,7 +332,7 @@ internal sealed class Program
         var guid = Guid.NewGuid();
         var oldInfo = new Information() { Info = "Old Info", InfoId = guid, InnerObjects = [new InnerModel { Id = 1, Name = "Old Name" }] };
         var newInfo = new Information() { Info = "New Info", InfoId = guid, InnerObjects = [new InnerModel { Id = 1, Name = "New Name" }] };
-        var changes = TrackComparer.Compare<Information>(oldInfo, newInfo);
+        var changes = ChangeTracker.GetChanges<Information>(oldInfo, newInfo);
 
         changes.ForEach(change => Console.WriteLine(change.ToString()));
         //====
