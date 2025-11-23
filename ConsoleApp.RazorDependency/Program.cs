@@ -111,7 +111,7 @@ public static class ChangeTracker
         }
 
         var compareMethod = typeof(ChangeTracker)
-            .GetMethod(nameof(Compare), BindingFlags.Public | BindingFlags.Static)!
+            .GetMethod(nameof(GetChanges), BindingFlags.Public | BindingFlags.Static)!
             .MakeGenericMethod(type);
 
         var result = compareMethod.Invoke(null, [oldValue, newValue, parentPath, parentDomain]);
