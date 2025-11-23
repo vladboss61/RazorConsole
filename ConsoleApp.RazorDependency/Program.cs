@@ -17,7 +17,7 @@ namespace ConsoleApp.RazorDependency;
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 public class TrackAsAttribute : Attribute
 {
-    public string? Name { get; }
+    public string? Domain { get; }
     public string FriendlyName { get; }
 
     public TrackAsAttribute(string friendlyName)
@@ -25,9 +25,9 @@ public class TrackAsAttribute : Attribute
         FriendlyName = friendlyName;
     }
 
-    public TrackAsAttribute(string name, string friendlyName)
+    public TrackAsAttribute(string domain, string friendlyName)
     {
-        Name = name;
+        Domain = domain;
         FriendlyName = friendlyName;
     }
 }
@@ -66,15 +66,15 @@ public static class TrackComparer
                 ? property.Name
                 : $"{parentPath}.{property.Name}";
 
-            var friendlyNameWithSubdomain = string.IsNullOrEmpty(trackAttribute.Name)
+            var friendlyNameWithSubdomain = string.IsNullOrEmpty(trackAttribute.Domain)
                 ? trackAttribute.FriendlyName
-                : $"{trackAttribute.Name}.{trackAttribute.FriendlyName}";
+                : $"{trackAttribute.Domain}.{trackAttribute.FriendlyName}";
 
             var currentFriendlyName = string.IsNullOrEmpty(parentPath)
                 ? friendlyNameWithSubdomain
                 : $"{parentPath}.{friendlyNameWithSubdomain}";
 
-            var currentSubDomain = string.IsNullOrEmpty(parentSubDomain) ? trackAttribute.Name : parentSubDomain;
+            var currentSubDomain = string.IsNullOrEmpty(parentSubDomain) ? trackAttribute.Domain : parentSubDomain;
 
             if (IsCollection(property.PropertyType))
             {
@@ -302,10 +302,14 @@ public class TrackChange
     }
 }
 
+
 public class Information
 {
-    [TrackAs(name: "Info", friendlyName: "Information about changes")]
+    [TrackAs(domain: "Info", friendlyName: "Information about changes")]
     public string Info { get; set; }
+
+    [TrackAs(friendlyName: "InnerObjects")]
+    public List<object> InnerObjects { get; set; }
 
     [TrackId]
     public Guid InfoId { get; set; }
