@@ -328,12 +328,14 @@ internal sealed class Program
 {
     public static async Task Main(string[] args)
     {
+        //==== Change tracker.
         var guid = Guid.NewGuid();
-        var oldInfo = new Information() {  Info = "Old Info", InfoId = guid };
-        var newInfo = new Information() { Info = "New Info", InfoId = guid };
+        var oldInfo = new Information() { Info = "Old Info", InfoId = guid, InnerObjects = [new InnerModel { Id = 1, Name = "Old Name" }] };
+        var newInfo = new Information() { Info = "New Info", InfoId = guid, InnerObjects = [new InnerModel { Id = 1, Name = "New Name" }] };
         var changes = TrackComparer.Compare<Information>(oldInfo, newInfo);
 
         changes.ForEach(change => Console.WriteLine(change.ToString()));
+        //====
 
         IServiceCollection services = new ServiceCollection();
         services.AddRazorHtmlRenderer();
